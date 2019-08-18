@@ -3,14 +3,33 @@
     <ion-title>
       Noticias para ti, David
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="mostrarFiltradoNoticias = !mostrarFiltradoNoticias">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <!-- <ion-content color="dark"> -->
 <ion-content>
+  
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  
+  <div class="filtrado-noticias animated slideInDown fast" *ngIf="mostrarFiltradoNoticias">
+    <ion-searchbar placeholder="Busca noticias" 
+                   (ionChange)="filtraNoticias($event)" 
+                   [debounce]="250"
+                   animated 
+                   showCancelButton="true" 
+                   spellcheck
+                   cancelButtonText="Cancelar"
+                   mode="ios"
+                   ></ion-searchbar>
+  </div>
+
   <app-noticias [noticias]="noticias"></app-noticias>
 
   <ion-infinite-scroll [disabled]="!enableInfiniteScroll" threshold="150px" (ionInfinite)="cargarMasNoticias($event)">

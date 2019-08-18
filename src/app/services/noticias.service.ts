@@ -27,9 +27,16 @@ export class NoticiasService {
     return this.http.get<T>(query, { headers });
   }
 
-  getTopHeadlines() {
+  getTopHeadlines( filtro?: string ) {
     this.headlinesPage++;
+    if ( filtro ) {
+      return this.obtenerNoticiasFiltroTexto( filtro );
+    }
     return this.ejecutarQuery<NewsApiResponse>(`/top-headlines?country=us&page=${this.headlinesPage}`);
+  }
+
+  obtenerNoticiasFiltroTexto( filtro: string ) {
+    return this.ejecutarQuery<NewsApiResponse>(`/everything?q=${filtro}&page=${this.headlinesPage}`);
   }
 
   getTopHeadlinesPorCategoria( categoria: string ) {

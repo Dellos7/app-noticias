@@ -13,6 +13,8 @@ export class Tab1Page implements OnInit {
   noticias: Article[] = [];
   enableInfiniteScroll = true;
   noticiasObsSubscription: Subscription;
+  mostrarFiltradoNoticias = false;
+  busquedaValue: string;
 
   constructor( private noticiasSvc: NoticiasService ) {
   }
@@ -26,7 +28,8 @@ export class Tab1Page implements OnInit {
   }
 
   cargarNoticias( event? ) {
-    this.noticiasObsSubscription = this.noticiasSvc.getTopHeadlines().subscribe( resp => {
+    console.log(this.busquedaValue);
+    this.noticiasObsSubscription = this.noticiasSvc.getTopHeadlines( this.busquedaValue ).subscribe( resp => {
       this.noticias.push( ...resp.articles );
       if ( !resp.articles || resp.articles.length === 0 ) {
         this.enableInfiniteScroll = false;
@@ -40,6 +43,13 @@ export class Tab1Page implements OnInit {
   doRefresh(event) {
     this.noticiasObsSubscription.unsubscribe();
     this.cargarNoticias(event);
+  }
+
+  filtraNoticias(event) {
+    console.log(event);
+    this.busquedaValue = event.target.value;
+    this.noticias = [];
+    this.cargarNoticias();
   }
 
 }
