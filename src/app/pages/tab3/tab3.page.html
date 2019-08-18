@@ -1,0 +1,22 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Favoritos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-text padding 
+              color="light" 
+              class="ion-text-center" 
+              *ngIf="!dataLocalSvc.noticiasFavoritas || dataLocalSvc.noticiasFavoritas.length === 0">
+      <p>No hay noticias favoritas</p>
+    </ion-text>
+
+  <app-noticias [noticias]="dataLocalSvc.noticiasFavoritas" 
+                [enableSkeletonList]="false"
+                [enFavoritos]="true"></app-noticias>
+
+</ion-content>

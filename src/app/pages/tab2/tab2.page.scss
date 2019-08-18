@@ -1,0 +1,17 @@
+.custom-ion-segment {
+    --background: var(--ion-color-dark);
+    --background-activated: var(--ion-color-dark);
+    --background-checked: var(--ion-color-dark);
+    --background-hover: var(--ion-color-dark);
+}
+
+.custom-ion-segment-button {
+    text-transform: none;
+    --color: var(--ion-color-light);
+}
+
+// ion-segment-button {
+//     text-transform: none;
+//     background-color: var( --ion-color-dark ) !important;
+//     color: white !important;
+// }

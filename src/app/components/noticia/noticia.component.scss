@@ -1,0 +1,25 @@
+ion-card-title {
+    font-size: 1.3rem;
+}
+
+.noticia-more {
+    font-size: 25px;
+    position: absolute;
+    right: -10px;
+    top: -18px;
+
+    & ion-button {
+        --padding-end: 5px;
+        --padding-start: 5px;
+    }
+}
+
+web-social-share {
+    --web-social-share-height: 140px;
+    --web-social-share-brand-font-size: .8rem;
+
+    & ion-icon {
+        font-size: 2.5rem;
+        display: block;
+    }
+}

@@ -1,0 +1,33 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Titulares
+    </ion-title>
+  </ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)" scrollable="true" class="custom-ion-segment" mode="md">
+      <ion-segment-button [value]="categoria" class="custom-ion-segment-button" mode="md" *ngFor="let categoria of categorias">
+        <ion-label>{{ categoria | titlecase }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-text color="light">
+      <h1 class="ion-padding-start">Noticias de {{ segmentValue | titlecase }}</h1>
+    </ion-text>
+    
+    <app-noticias [noticias]="noticias"></app-noticias>
+
+    <ion-infinite-scroll [disabled]="!enableInfiniteScroll" threshold="150px" (ionInfinite)="cargarMasNoticias($event)">
+      <ion-infinite-scroll-content color="light" loadingSpinner="crescent" loadingText="Cargando noticias...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-text padding color="light" class="ion-text-center" *ngIf="!enableInfiniteScroll">
+      <p>No hay más noticias que cargar</p>
+    </ion-text>
+
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-card color="dark" class="animated fadeIn fast">
+    <ion-card-header>
+      <ion-card-subtitle>
+        <span class="text-primary">{{ index + 1 }}. </span>
+        <span class="noticia-source-name">{{ noticia.source.name }}</span>
+        <div class="noticia-more">
+          <ion-button mode="md" color="primary" fill="clear" (click)="abrirActionSheet()">
+            <ion-icon slot="icon-only" name="more"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-subtitle>
+      <ion-card-title (click)="abrirNoticia()">{{ noticia.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-img  *ngIf="noticia.urlToImage"
+              [src]="noticia.urlToImage" 
+              (click)="abrirNoticia()"
+              class="animated fadeIn fast"></ion-img>
+    <ion-card-content>
+      <p>{{ noticia.description }}</p>
+    </ion-card-content>
+  </ion-card>
+  <web-social-share [show]="false" [share]="webSocialShareOptions" (closed)="onWebSocialShareClose()" id="wss-{{ index + 1 }}">
+    <ion-icon name="logo-twitter" style=" color: #55acee" slot="twitter"></ion-icon>
+    <ion-icon name="logo-facebook" style="color: #3b5999" slot="facebook"></ion-icon>
+    <ion-icon name="logo-reddit" style="color: #ff5700" slot="reddit"></ion-icon>
+    <ion-icon name="logo-linkedin" style="color: #0077B5" slot="linkedin"></ion-icon>
+    <ion-icon name="logo-pinterest" style="color: #bd081c" slot="pinterest"></ion-icon>
+    <ion-icon name="logo-whatsapp" style="color: #25D366" slot="whatsapp"></ion-icon>
+    <ion-icon name="mail" slot="email"></ion-icon>
+    <ion-icon name="copy" slot="copy"></ion-icon>
+  </web-social-share>

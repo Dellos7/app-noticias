@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Noticias para ti, David
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content color="dark"> -->
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <app-noticias [noticias]="noticias"></app-noticias>
+
+  <ion-infinite-scroll [disabled]="!enableInfiniteScroll" threshold="150px" (ionInfinite)="cargarMasNoticias($event)">
+    <ion-infinite-scroll-content color="light" loadingSpinner="crescent" loadingText="Cargando noticias...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-text padding color="light" class="ion-text-center" *ngIf="!enableInfiniteScroll">
+    <p>No hay más noticias que cargar</p>
+  </ion-text>
+    
+</ion-content>

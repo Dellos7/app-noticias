@@ -1,0 +1,10 @@
+<ion-grid fixed *ngIf="noticias && noticias.length > 0">
+    <!-- <ion-grid fixed *ngIf="false"> -->
+    <ion-row>
+      <ion-col size="12" size-lg="4" size-md="6" size-sm="12" size-xs="12" *ngFor="let noticia of noticias; let i = index">
+        <app-noticia [noticia]="noticia" [index]="i" [enFavoritos]="enFavoritos"></app-noticia>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+<skeleton-text-list *ngIf="enableSkeletonList && (!noticias || noticias.length == 0)" numberOfElements="10"></skeleton-text-list>

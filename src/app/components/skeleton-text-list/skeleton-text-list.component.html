@@ -1,0 +1,18 @@
+<ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-lg="4" size-md="6" size-sm="12" size-xs="12" *ngFor="let el of els; let i = index">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-skeleton-text animated width="40%"></ion-skeleton-text>
+            </ion-card-subtitle>
+            <ion-card-title><ion-skeleton-text animated width="80%"></ion-skeleton-text></ion-card-title>
+          </ion-card-header>
+          <ion-skeleton-text animated width="90%" style="height: 50px; margin: 0 auto"></ion-skeleton-text>
+          <ion-card-content>
+            <ion-skeleton-text width="80%"></ion-skeleton-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
