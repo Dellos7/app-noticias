@@ -8,6 +8,7 @@
             <ion-icon slot="icon-only" name="more"></ion-icon>
           </ion-button>
         </div>
+        <div class="noticia-fecha text-medium">{{ noticia.publishedAt | date: 'mediumDate' }}</div>
       </ion-card-subtitle>
       <ion-card-title (click)="abrirNoticia()">{{ noticia.title }}</ion-card-title>
     </ion-card-header>

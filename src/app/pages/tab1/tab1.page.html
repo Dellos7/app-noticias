@@ -4,7 +4,7 @@
       Noticias para ti, David
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="mostrarFiltradoNoticias = !mostrarFiltradoNoticias">
+      <ion-button (click)="mostrarOcultarFiltros()">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -28,6 +28,14 @@
                    cancelButtonText="Cancelar"
                    mode="ios"
                    ></ion-searchbar>
+    <ion-item class="filtro-fecha-item">
+      <ion-label>Publicación desde</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" [value]="startDateValue" (ionChange)="cambiaFiltroFechaStart($event)"></ion-datetime>
+    </ion-item>
+    <ion-item class="filtro-fecha-item">
+      <ion-label>Publicación hasta</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" [value]="endDateValue" (ionChange)="cambiaFiltroFechaEnd($event)"></ion-datetime>
+    </ion-item>
   </div>
 
   <app-noticias [noticias]="noticias"></app-noticias>
