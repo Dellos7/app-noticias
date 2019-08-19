@@ -27,19 +27,23 @@ export class NoticiasService {
     return this.http.get<T>(query, { headers });
   }
 
-  getTopHeadlines( resetPages?: boolean, filtro?: string ) {
+  getTopHeadlines( resetPages?: boolean, filtro?: string, ordenarPor?: string, fechaStart?: string, fechaEnd?: string ) {
     if ( resetPages ) {
       this.headlinesPage = 0;
     }
     this.headlinesPage++;
     if ( filtro ) {
-      return this.obtenerNoticiasFiltroTexto( filtro );
+      return this.obtenerNoticiasFiltroTextoYFechas( filtro, ordenarPor, fechaStart, fechaEnd );
     }
     return this.ejecutarQuery<NewsApiResponse>(`/top-headlines?country=us&page=${this.headlinesPage}`);
   }
 
-  obtenerNoticiasFiltroTexto( filtro: string ) {
-    return this.ejecutarQuery<NewsApiResponse>(`/everything?q=${filtro}&sortBy=publishedAt&page=${this.headlinesPage}`);
+  obtenerNoticiasFiltroTextoYFechas( filtro: string, ordenarPor?: string, fechaStart?: string, fechaEnd?: string ) {
+    return this.ejecutarQuery<NewsApiResponse>(
+      `/everything?q=${filtro}&sortBy=${ordenarPor}&page=${this.headlinesPage}` +
+      `${fechaStart ? '&from=' + fechaStart : ''}` +
+      `${fechaEnd ? '&to=' + fechaEnd : ''}`
+      );
   }
 
   getTopHeadlinesPorCategoria( categoria: string ) {
@@ -50,4 +54,9 @@ export class NoticiasService {
     this.categoriaPage++;
     return this.ejecutarQuery<NewsApiResponse>(`/top-headlines?country=us&category=${categoria}&page=${this.categoriaPage}`);
   }
+
+  formatDate( date: Date ): string {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  }
+
 }

@@ -4,7 +4,9 @@ ion-searchbar {
     --color: white;
 }
 
-.filtro-fecha-item {
-    --background: inherit;
-    --color: white;
+.filtrado-noticias {
+    & ion-item {
+        --background: inherit;
+        --color: white;
+    }
 }

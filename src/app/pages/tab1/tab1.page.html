@@ -5,7 +5,7 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="mostrarOcultarFiltros()">
-        <ion-icon slot="icon-only" name="search"></ion-icon>
+        <ion-icon slot="icon-only" [name]="searchBarIcon"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -18,7 +18,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-  <div class="filtrado-noticias animated slideInDown fast" *ngIf="mostrarFiltradoNoticias">
+  <!-- <div class="filtrado-noticias animated fast slideInDown"  
+        *ngIf="mostrarFiltradoNoticias"> -->
+  <div class="filtrado-noticias"  
+        *ngIf="mostrarFiltradoNoticias"
+        [@slideInOut]>
     <ion-searchbar placeholder="Busca noticias" 
                    (ionChange)="filtraNoticias($event)" 
                    [debounce]="250"
@@ -30,12 +34,37 @@
                    ></ion-searchbar>
     <ion-item class="filtro-fecha-item">
       <ion-label>Publicación desde</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" [value]="startDateValue" (ionChange)="cambiaFiltroFechaStart($event)"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD, YYYY"
+                    pickerFormat="MMM DD, YYYY"
+                    [(ngModel)]="startDateValue"
+                    (ionChange)="cambiaFiltroFechaStart($event)"
+                    doneText="Ok"
+                    cancelText="Cancelar"
+                    [monthNames]="['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']"
+                    [monthShortNames]="['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']"></ion-datetime>
     </ion-item>
     <ion-item class="filtro-fecha-item">
       <ion-label>Publicación hasta</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY" [value]="endDateValue" (ionChange)="cambiaFiltroFechaEnd($event)"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD, YYYY"
+                    pickerFormat="MMM DD, YYYY"
+                    [(ngModel)]="endDateValue"
+                    (ionChange)="cambiaFiltroFechaEnd($event)"
+                    doneText="Ok"
+                    cancelText="Cancelar"
+                    [monthNames]="['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']"
+                    [monthShortNames]="['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']"></ion-datetime>
     </ion-item>
+    <ion-item>
+      <ion-label>Ordenar por</ion-label>
+      <ion-select placeholder="Elige uno" [(ngModel)]="ordenarPor" (ionChange)="ordenarPorChange($event)">
+        <ion-select-option value="publishedAt" [selected]="true">Fecha de publicación</ion-select-option>
+        <ion-select-option value="relevancy">Relevancia</ion-select-option>
+        <ion-select-option value="popularity">Popularidad</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button (click)="mostrarOcultarFiltros()" expand="full" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-dropdown"></ion-icon>
+    </ion-button>
   </div>
 
   <app-noticias [noticias]="noticias"></app-noticias>
